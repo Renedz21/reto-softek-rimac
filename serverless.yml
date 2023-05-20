@@ -1,0 +1,74 @@
+service: aws-lambda-crud-node
+frameworkVersion: "3"
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "arn:aws:dynamodb:us-east-1:929655076362:table/TaskTable"
+
+functions:
+  hello:
+    handler: src/index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+  getTasks:
+    handler: src/getTasks.handler
+    events:
+      - httpApi:
+          path: /tasks
+          method: get
+  createTask:
+    handler: src/addTask.handler
+    events:
+      - httpApi:
+          path: /tasks
+          method: post
+  getPeople:
+    handler: swapi/getPeople.index
+    events:
+      - httpApi:
+          path: /people
+          method: get
+  getOnePerson:
+    handler: swapi/getPeople.getById
+    events:
+      - httpApi:
+          path: /people/{id}
+          method: get
+  getPlanets:
+    handler: swapi/getPlanets.handler
+    events:
+      - httpApi:
+          path: /planets
+          method: get
+
+resources:
+  Resources:
+    TaskTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: TaskTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
