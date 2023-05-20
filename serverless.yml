@@ -34,6 +34,12 @@ functions:
       - httpApi:
           path: /tasks
           method: get
+  getOneTask:
+    handler: src/getTasks.taskId
+    events:
+      - httpApi:
+          path: /tasks/{id}
+          method: get
   createTask:
     handler: src/addTask.handler
     events:
@@ -41,19 +47,19 @@ functions:
           path: /tasks
           method: post
   getPeople:
-    handler: swapi/getPeople.index
+    handler: src/swapi/getPeople.index
     events:
       - httpApi:
           path: /people
           method: get
   getOnePerson:
-    handler: swapi/getPeople.getById
+    handler: src/swapi/getPeople.getById
     events:
       - httpApi:
           path: /people/{id}
           method: get
   getPlanets:
-    handler: swapi/getPlanets.handler
+    handler: src/swapi/getPlanets.handler
     events:
       - httpApi:
           path: /planets

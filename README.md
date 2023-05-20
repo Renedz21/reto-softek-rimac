@@ -51,19 +51,19 @@ functions:
   getOnePerson: aws-lambda-crud-node-dev-getOnePerson (17 MB)
   getPlanets: aws-lambda-crud-node-dev-getPlanets (17 MB)
 ```
-<!-- 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/). -->
+
+_Note_:
+  - El API Gateway puede tardar varios minutos en desplegarse y estar listo para su uso.
+  - El API por defecto que es `hello` puede ser llamado via HTTP con el link: `https://oesr4hclre.execute-api.us-east-1.amazonaws.com`
 
 ### Invocation
 
-<!-- After successful deployment, you can call the created application via HTTP: -->
 Despues de un despliegue exitoso, puedes llamar a la aplicacion creada via HTTP:
 
 ```bash
 curl hhttps://oesr4hclre.execute-api.us-east-1.amazonaws.com/tasks
 ```
 
-<!-- Which should result in response similar to the following (removed `input` content for brevity): -->
 Lo que deberia resultar en una respuesta similar a la siguiente
 
 ```json
@@ -80,14 +80,13 @@ Lo que deberia resultar en una respuesta similar a la siguiente
 
 ### Local development
 
-<!-- You can invoke your function locally by using the following command: -->
 Puedes invocar tu funcion localmente usando el siguiente comando:
 
 ```bash
 npm run start
 ```
 
-Which should result in response similar to the following:
+Lo que deberia resultar en una respuesta similar a la siguiente:
 
 ```
 > start
